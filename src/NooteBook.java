@@ -29,12 +29,12 @@ public class NooteBook {
     private static ArrayList<NooteBook> notebookListesi = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    public static ArrayList<NooteBook> prtcNooteBook() {
+    public static void prtcNooteBook() {
 
         notebookListesi.add(new NooteBook(1, "Samsung", "NoteBook", 1000, 0, 1, "Samsung Nova", 15.4, "512 SSD", 16));
         notebookListesi.add(new NooteBook(2, "HP", "NoteBook", 1200, 0, 1, "HP EliteBook", 14.0, "1 TB HDD", 8));
         notebookListesi.add(new NooteBook(3, "Dell", "NoteBook", 1350, 0, 1, "Dell XPS", 13.3, "256 SSD", 16));
-        return notebookListesi;
+
 
     }
 
@@ -43,44 +43,59 @@ public class NooteBook {
         System.out.println("Yeni NoteBook Bilgilerini Girin:");
 
         System.out.println("Marka:");
-        String marka = scanner.nextLine();
+        Brand.printBrandsByID();
+        int ID = scanner.nextInt();
+        String marka = Brand.getBrand(ID).getAd();
+        scanner.nextLine();
+
 
         System.out.println("Kategori:");
         String kategori = scanner.nextLine();
 
         System.out.println("Fiyatı:");
-        int fiyat = scanner.nextInt();
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
+        double fiyat = scanner.nextDouble();
         scanner.nextLine(); // Boş satırı oku
 
         System.out.println("Model:");
         String model = scanner.nextLine();
 
-        System.out.println("Ekran Boyutu:");
+        System.out.println("Ekran Boyutu İnc:");
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
         double ekranBoyutu = scanner.nextDouble();
         scanner.nextLine(); // Boş satırı oku
 
-        System.out.println("Depolama:");
+        System.out.println("Depolama GB:");
         String depolama = scanner.nextLine();
 
-
-        System.out.println("Ram:");
+        System.out.println("Ram GB:");
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
         int ram = scanner.nextInt();
-        scanner.nextLine(); // Boş satırı oku
-        scanner.close();
 
-        prtcNooteBook();
+
+
+
         notebookListesi.add(new NooteBook(notebookListesi.size() + 1, marka, kategori, fiyat, 0, 1, model, ekranBoyutu, depolama, ram));
-        printNoteBookList(notebookListesi);
+        printNoteBookList(notebookListesi); //0 ,str,str,d,0,0,str,double,str,int
     }
 
     public static void noteBookListesi() {
 
-        printNoteBookList(prtcNooteBook());
+        printNoteBookList(notebookListesi);
     }
 
     public static void deleteProduct() {
         // Veri listesinde productId'ye sahip ürünü bul
-        prtcNooteBook();
+
         System.out.println("Silmek İstediginiz Ürünün İdsini giriniz");
         int productId = scanner.nextInt();
         NooteBook productToDelete = null;
@@ -99,8 +114,9 @@ public class NooteBook {
         } else {
             System.out.println("Belirtilen ID'ye sahip ürün bulunamadı.");
         }
-        ArrayList<NooteBook> newNoteBookArrayList = new ArrayList<>(notebookListesi);
-        printNoteBookList(newNoteBookArrayList);
+
+        printNoteBookList(notebookListesi);
+
     }
 
     public static void brandFilter() {
@@ -130,6 +146,7 @@ public class NooteBook {
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
+
     }
 
     public int getProtectedID() {

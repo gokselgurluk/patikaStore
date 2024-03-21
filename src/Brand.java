@@ -1,15 +1,19 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.TreeSet;
 
-public class Brand {
+public class Brand  {
     private int id;
     private String ad;
+    private static ArrayList<Brand> brandListByID = new ArrayList<>();
     private static TreeSet<Brand> brandList = new TreeSet<>(new Comparator<Brand>() {
         @Override
         public int compare(Brand o1, Brand o2) {
             return o1.getAd().compareTo(o2.getAd());
         }
     });
+
 
     public Brand(int id, String ad) {
         this.id = id;
@@ -34,8 +38,20 @@ public class Brand {
         brandList.add(new Brand(7, "HP"));
         brandList.add(new Brand(8, "Xiaomi"));
         brandList.add(new Brand(9, "Monster"));
+        brandListByID.addAll(brandList);
     }
-
+    public static void sortBrandsById() {
+        Collections.sort(brandListByID, Comparator.comparingInt(Brand::getId));
+    }
+    public static void printBrandsByID() {
+        createBrands();
+        sortBrandsById();
+        System.out.println("Marka Listesi ");
+        for (Brand brand : brandListByID) {
+            System.out.println(brand.getId()+" "+brand.getAd());
+        }
+        System.out.println("----------------------------");
+    }
     public static void printBrands() {
         createBrands();
         System.out.println("Marka Listesi ");

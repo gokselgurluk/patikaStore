@@ -1,6 +1,3 @@
-import org.w3c.dom.html.HTMLBRElement;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,20 +28,17 @@ public class Telephone {
         this.batteryPower = batteryPower;
         this.ram = ram;
         this.color = color;
+
     }
 
-    private static ArrayList<Telephone> telephonesList = new ArrayList<>();
+    private static  ArrayList<Telephone> telephonesList = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
-    public static ArrayList<Telephone> telephones() {
-
-
+    public static void prtcTelephones() {
         telephonesList.add(new Telephone(1, "Huwai", "Mobil", 1000, 0, 1, "Huwai Amiral", 6.7, "128 GB", "4000 Mah", 8, "Red"));
         telephonesList.add(new Telephone(2, "Apple", "Mobil", 1500, 0, 1, "Apple XR", 10.0, "64 GB", "3300 Mah", 16, "Black"));
         telephonesList.add(new Telephone(3, "Samsung", "Mobil", 770, 0, 1, "Samsung Galaxy", 6.0, "512 GB", "2800 Mah", 32, "Blue"));
         telephonesList.add(new Telephone(4, "Apple", "Mobil", 1500, 0, 1, "Apple XR", 10.0, "64 GB", "3300 Mah", 16, "Black"));
-
-        return telephonesList;
 
     }
 
@@ -53,53 +47,66 @@ public class Telephone {
         System.out.println("Yeni Telefon Bilgilerini Girin:");
 
         System.out.println("Marka:");
-        String marka = scanner.nextLine();
+        Brand.printBrandsByID();
+        int ID = scanner.nextInt();
+        String marka = Brand.getBrand(ID).getAd();
+        scanner.nextLine();
+
 
         System.out.println("Kategori:");
         String kategori = scanner.nextLine();
 
         System.out.println("Fiyatı:");
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
         int fiyat = scanner.nextInt();
         scanner.nextLine(); // Boş satırı oku
 
         System.out.println("Model:");
         String model = scanner.nextLine();
 
-        System.out.println("Ekran Boyutu:");
+        System.out.println("Ekran Boyutu İnc:");
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
         double ekranBoyutu = scanner.nextDouble();
         scanner.nextLine(); // Boş satırı oku
 
-        System.out.println("Depolama:");
+        System.out.println("Depolama GB: ");
         String depolama = scanner.nextLine();
 
-        System.out.println("Pil Kapasitesi:");
+        System.out.println("Pil Kapasitesi Mah: ");
         String pilKapasitesi = scanner.nextLine();
 
-        System.out.println("Ram:");
+        System.out.println("Ram GB: ");
+        while (!scanner.hasNextInt()){
+            System.out.println("Sayısal deger giriniz");
+            scanner.nextLine();
+        }
         int ram = scanner.nextInt();
         scanner.nextLine(); // Boş satırı oku
 
         System.out.println("Renk:");
         String renk = scanner.nextLine();
 
-        scanner.close();
 
-        telephones();
         telephonesList.add(new Telephone(telephonesList.size() + 1, marka, kategori, fiyat, 0, 1, model, ekranBoyutu, depolama, pilKapasitesi, ram, renk));
         printTelList(telephonesList);
-
     }
 
     public static void telProductList() {
 
-        printTelList(telephones());
+        printTelList(telephonesList);
     }
 
     public static void deleteProduct() {
         // Veri listesinde productId'ye sahip ürünü bul
-        telephones();
         System.out.println("Silmek İstediginiz Ürünün İdsini giriniz");
         int productId = scanner.nextInt();
+
         Telephone productToDelete = null;
         for (Telephone telephone : telephonesList) {
             if (telephone.protectedID == productId) {
@@ -116,14 +123,12 @@ public class Telephone {
         } else {
             System.out.println("Belirtilen ID'ye sahip ürün bulunamadı.");
         }
-        ArrayList<Telephone> newTelephoneArrayList = new ArrayList<>(telephonesList);
-        printTelList(newTelephoneArrayList);
-
+        printTelList(telephonesList); // Güncellenmiş listeyi bastır
 
     }
 
     public static void brandFilter() {
-        telephones();
+
         System.out.print("Filtrelemek istediğiniz ürün markasını giriniz :");
         String filter = scanner.nextLine();
         ArrayList<Telephone> filterTel = new ArrayList<>();

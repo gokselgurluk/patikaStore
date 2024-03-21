@@ -5,16 +5,20 @@ import java.util.Scanner;
 public class PatikaStore {
     public static Scanner input = new Scanner(System.in);
 
-    public static void run() {
+    public static void run()  {
+
         boolean isVote = true;
         while (isVote) {
             System.out.println("Kategori Seçiniz\n" + "1 - Cep Telefonu İşlemleri" + "\n2 - Notebook İşlemleri: " + "\n3 - Marka Listele" + "\n0 - Çıkış Yap");
 
+            while (!input.hasNextInt())
+            {
+                System.out.println("Kategori Seçiniz\n" + "1 - Cep Telefonu İşlemleri" + "\n2 - Notebook İşlemleri: " + "\n3 - Marka Listele" + "\n0 - Çıkış Yap");
+                input.nextLine();
+            }
 
-            if (input.hasNextInt()) {
-                int vote = input.nextInt();
-                switch (vote) {
-
+            int vote = input.nextInt();
+            switch (vote) {
                     case 1: {
                         System.out.println("1 - Ürünleri Listele 2 - Ürün Ekle  3 - Ürün Sil 4 - Markaya Göre Ara");
                         int userInp = input.nextInt();
@@ -22,6 +26,7 @@ public class PatikaStore {
                             Telephone.telProductList();
                         } else if (userInp == 2) {
                             Telephone.yeniTelefonBilgileriniAl();
+                            input.nextLine();
                         } else if (userInp == 3) {
                             Telephone.deleteProduct();
 
@@ -42,10 +47,12 @@ public class PatikaStore {
 
                         System.out.println("1 - Ürünleri Listele 2 - Ürün Ekle  3 - Ürün Sil 4 - Markaya Göre Ara");
                         int userInp = input.nextInt();
+
                         if (userInp == 1) {
                             NooteBook.noteBookListesi();
                         } else if (userInp == 2) {
                             NooteBook.yeniNooteBookBilgileriniAl();
+                            input.nextLine();
                         } else if (userInp == 3) {
                             NooteBook.deleteProduct();
 
@@ -71,11 +78,7 @@ public class PatikaStore {
                         break;
                     }
                 }
-            } else {
-                input.next();
-                System.out.println("Geçersiz giriş. Lütfen bir tamsayı girin.");
 
-            }
         }
     }
 }
