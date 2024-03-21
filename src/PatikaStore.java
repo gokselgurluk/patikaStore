@@ -25,7 +25,7 @@ public class PatikaStore {
                         if (userInp == 1) {
                             Telephone.telProductList();
                         } else if (userInp == 2) {
-                            Telephone.yeniTelefonBilgileriniAl();
+                            Telephone.newTelePhoneGetInfo();
                             input.nextLine();
                         } else if (userInp == 3) {
                             Telephone.deleteProduct();
@@ -51,7 +51,7 @@ public class PatikaStore {
                         if (userInp == 1) {
                             NooteBook.noteBookListesi();
                         } else if (userInp == 2) {
-                            NooteBook.yeniNooteBookBilgileriniAl();
+                            NooteBook.newNooteBookGetInfo();
                             input.nextLine();
                         } else if (userInp == 3) {
                             NooteBook.deleteProduct();

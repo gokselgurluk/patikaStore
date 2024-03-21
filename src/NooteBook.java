@@ -38,7 +38,7 @@ public class NooteBook {
 
     }
 
-    public static void yeniNooteBookBilgileriniAl() {
+    public static void newNooteBookGetInfo() {
 
         System.out.println("Yeni NoteBook Bilgilerini Girin:");
 

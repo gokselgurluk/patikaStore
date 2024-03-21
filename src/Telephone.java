@@ -42,7 +42,7 @@ public class Telephone {
 
     }
 
-    public static void yeniTelefonBilgileriniAl() {
+    public static void newTelePhoneGetInfo() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Yeni Telefon Bilgilerini Girin:");
 
